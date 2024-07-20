@@ -1,22 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Toolbar from './components/Toolbar';
+import Timetable from './components/Timetable'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <Toolbar addPlace={addPlace}></Toolbar>
+      <Timetable></Timetable>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -30,6 +23,11 @@ function App() {
       </p>
     </>
   )
+}
+
+function addPlace(name: string, timezoneOffset: number | '') {
+  console.log(name);
+  console.log(timezoneOffset);
 }
 
 export default App

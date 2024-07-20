@@ -1,0 +1,22 @@
+.nl-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.nl-input {
+  width: 10em;
+  height: 2em;
+  margin: 0.5em;
+}
+
+.nl-button {
+  width: 10em;
+  height: 2.2em;
+  margin: 0.5em;
+  padding: 0em;
+  background: darkred;
+
+}
+.nl-button:focus {
+  outline: none;
+}
