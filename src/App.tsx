@@ -1,33 +1,32 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useRef } from 'react';
+import './App.css';
 import Toolbar from './components/Toolbar';
-import Timetable from './components/Timetable'
+import Timetable from './components/Timetable';
+import { Place } from './Place';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [timeTable, setTimetable] = useState<Place[]>([]);
+  const timetableRef = useRef<Place[]>([]);
+  const addPlace = (name: string, timezoneOffset: number | '') => {
+    const place = new Place(name, timezoneOffset);
+    timetableRef.current.push(place);
+    setTimetable([...timetableRef.current]);
+  };
+  const deletePlace = (id: number) => {
+    timetableRef.current = timetableRef.current.filter(
+      (place) => place.id !== id
+    );
+    setTimetable([...timetableRef.current]);
+  };
 
   return (
     <>
       <Toolbar addPlace={addPlace}></Toolbar>
-      <Timetable></Timetable>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="timetable-component">
+        <Timetable timetable={timeTable} deletePlace={deletePlace}></Timetable>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-function addPlace(name: string, timezoneOffset: number | '') {
-  console.log(name);
-  console.log(timezoneOffset);
-}
-
-export default App
+export default App;
